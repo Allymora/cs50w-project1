@@ -1,0 +1,54 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    allybooks 
+{% endblock %}
+
+{% block main %}
+<title> Login</title>
+<main>
+<body>
+
+    <div id="container">
+        <!-- Cover Box -->
+        <div id="cover">
+            <!-- Sign Up Section -->
+            <h1 class="sign-up">Holis, Friend!</h1>
+            <p class="sign-up">Antes de loguearte<br>recuerda registrarte</p>
+            <a class="button sign-up" href="#cover">Sign Up</a>
+            <!-- Sign In Section -->
+            <h1 class="sign-in">Holis otra vez!</h1>
+            <br>
+            <p class="sign-in">Si ya te registraste<br> puedes iniciar sesión</p>
+            <br>
+            <a class="button sub sign-in" href="#">Sign In</a>
+        </div>
+        <!-- Login Box -->
+        <div id="login">
+            <h1>Sign In</h1>
+            <br>
+            <form>
+                <input type="email" placeholder="Email" autocomplete="off"><br>
+                <input type="password" placeholder="Password" autocomplete="off"><br>
+                <input class="submit-btn" type="submit" value="Sign In">
+            </form>
+        </div>
+
+        <!-- Register Box -->
+        <div id="register">
+            <h1>Register</h1>
+            <br>
+            <form>
+                <input type="text" placeholder="Name" autocomplete="off"><br>
+                <input type="email" placeholder="Email" autocomplete="off"><br>
+                <input type="password" placeholder="Password" autocomplete="off"><br>
+                <input class="submit-btn" type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div> <!-- END Container -->
+    <!-- partial -->
+</body>
+
+</main>>
+{% endblock %}
