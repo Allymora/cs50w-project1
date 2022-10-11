@@ -31,7 +31,7 @@ def index():
 def register(): 
     error=''
     cat=''
-    #insersion en la tabla user
+    #insertion in table users
     if request.method == 'POST':
         user = request.form.get('username')
         password = request.form.get('password')
@@ -48,7 +48,6 @@ def register():
             
                 db.execute('insert into users(user_name, user_pass, user_mail) values(:user, :password, :email)', {"user":user, "password":generate_password_hash(password), "email":email})
                 db.commit()
-               
                 cat=db.execute("Select * from users where user_name = :username", {"username":user}).fetchone()
                 cat = dict(cat)
                 print(cat) 
@@ -98,3 +97,19 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")     
+
+@app.route("/search")
+def search():   
+    b =''
+    result =''
+    if request.method == "POST":
+        b = request.form.get("b")
+        b = "%" + b + "%"
+        result=db.execute("SELECT isbn, author, title, years FROM books WHERE isbn like :b or author like :b or title like :b",{"b":b}).fetchall()
+        db.commit()
+
+        print(result) #para ver si funciona xd
+
+        return render_template('books.html',result=result)
+    else:     
+        return render_template('search.html')

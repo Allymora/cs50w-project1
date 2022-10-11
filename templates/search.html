@@ -6,11 +6,13 @@ allybooks
 
 {% block main %}
 <title> Search</title>
+<br>
     <body>
+
         <div class="container">
+            
             <div class="forms-container">
                 <form method="POST" action="/search" onSubmit="return validarForm(this)">
-                    <br>
                     <div class="input-field">
                         <i class="fas fa-book"></i>
                         <input autocomplete="off" autofocus class="form-control" name="b"
