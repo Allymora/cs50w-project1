@@ -1,7 +1,6 @@
 import os
 import requests
-
-from flask import Flask, session,url_for,render_template, redirect
+from flask import Flask, session,url_for,render_template, redirect, request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -43,21 +42,22 @@ def register():
             error ="Password not mathched"
         else:
             try: 
-                db.execute('insert into users(user_name, user_pass, user_mail) values(:user, :password, :email)', {"user":user, "password":generate_password_hash(password), "email":email})
-                db.commit()
                 confirm = db.execute("SELECT user_name FROM users WHERE username = :usern", {"usern":user}).fetchall()
                 if(len(confirm) != 0):
                     return apology("Username is not available")
             
+                db.execute('insert into users(user_name, user_pass, user_mail) values(:user, :password, :email)', {"user":user, "password":generate_password_hash(password), "email":email})
+                db.commit()
+               
                 cat=db.execute("Select * from users where user_name = :username", {"username":user}).fetchone()
                 cat = dict(cat)
                 print(cat) 
                 session["user_id"] = cat["id_user"]
             except:  
                 error = "Username exist!"    
-        return render_template('login.html')
+        return redirect('login.html')
     else:
-        return render_template('index.html')    
+        return render_template('login.html')    
 
 @app.route("/login", methods=["GET", "POST"])
 def login(): 
